@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Turbo.az" Class="DataClassesCarsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WIN-ML3N7I995PP;Initial Catalog=Turbo.az;User ID=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="Turbo.azWithLinq.Properties.Settings" SettingsPropertyName="Turbo_azConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BanTypes" Member="BanTypes">
+    <Type Name="BanType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="BanType_Car" Member="Cars" ThisKey="Id" OtherKey="BanTypeId" Type="Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cars" Member="Cars">
+    <Type Name="Car">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Mileage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="MakeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ModelId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ColorId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BanTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GearId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FuelTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransmissionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EngVolumeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="BanType_Car" Member="BanType" ThisKey="BanTypeId" OtherKey="Id" Type="BanType" IsForeignKey="true" />
+      <Association Name="Color_Car" Member="Color" ThisKey="ColorId" OtherKey="Id" Type="Color" IsForeignKey="true" />
+      <Association Name="EngineVolume_Car" Member="EngineVolume" ThisKey="EngVolumeId" OtherKey="Id" Type="EngineVolume" IsForeignKey="true" />
+      <Association Name="FuelType_Car" Member="FuelType" ThisKey="FuelTypeId" OtherKey="Id" Type="FuelType" IsForeignKey="true" />
+      <Association Name="Gear_Car" Member="Gear" ThisKey="GearId" OtherKey="Id" Type="Gear" IsForeignKey="true" />
+      <Association Name="Make_Car" Member="Make" ThisKey="MakeId" OtherKey="Id" Type="Make" IsForeignKey="true" />
+      <Association Name="Model_Car" Member="Model" ThisKey="ModelId" OtherKey="Id" Type="Model" IsForeignKey="true" />
+      <Association Name="Region_Car" Member="Region" ThisKey="RegionId" OtherKey="Id" Type="Region" IsForeignKey="true" />
+      <Association Name="Transmission_Car" Member="Transmission" ThisKey="TransmissionId" OtherKey="Id" Type="Transmission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Colors" Member="Colors">
+    <Type Name="Color">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Color_Car" Member="Cars" ThisKey="Id" OtherKey="ColorId" Type="Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EngineVolumes" Member="EngineVolumes">
+    <Type Name="EngineVolume">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="EngineVolume_Car" Member="Cars" ThisKey="Id" OtherKey="EngVolumeId" Type="Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FuelTypes" Member="FuelTypes">
+    <Type Name="FuelType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="FuelType_Car" Member="Cars" ThisKey="Id" OtherKey="FuelTypeId" Type="Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gears" Member="Gears">
+    <Type Name="Gear">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Gear_Car" Member="Cars" ThisKey="Id" OtherKey="GearId" Type="Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Makes" Member="Makes">
+    <Type Name="Make">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Make_Car" Member="Cars" ThisKey="Id" OtherKey="MakeId" Type="Car" />
+      <Association Name="Make_Model" Member="Models" ThisKey="Id" OtherKey="MakeId" Type="Model" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Models" Member="Models">
+    <Type Name="Model">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MakeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Model_Car" Member="Cars" ThisKey="Id" OtherKey="ModelId" Type="Car" />
+      <Association Name="Make_Model" Member="Make" ThisKey="MakeId" OtherKey="Id" Type="Make" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Regions" Member="Regions">
+    <Type Name="Region">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Region_Car" Member="Cars" ThisKey="Id" OtherKey="RegionId" Type="Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transmissions" Member="Transmissions">
+    <Type Name="Transmission">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Transmission_Car" Member="Cars" ThisKey="Id" OtherKey="TransmissionId" Type="Car" />
+    </Type>
+  </Table>
+</Database>

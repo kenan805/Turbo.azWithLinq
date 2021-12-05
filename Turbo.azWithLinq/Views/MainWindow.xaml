@@ -5,21 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Turbo.azWithLinq"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" MinHeight="450" MaxHeight="600" MinWidth="800" MaxWidth="900">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="7*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="ƏTRAFLI AXTARIŞ" FontSize="20" FontWeight="Bold" Margin="10"/>
-        <Line Stroke="DimGray" StrokeThickness="1" X1="800" Y1="45" Y2="45"/>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="ƏTRAFLI AXTARIŞ" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <Line Stroke="DimGray" VerticalAlignment="Bottom" StrokeThickness="1" X1="3400" Y1="45" Y2="45"/>
+
+        </Grid>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.55*"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.55*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
@@ -32,7 +49,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Marka" FontSize="16" Margin="10"/>
+            <TextBlock Text="Marka" FontSize="16" Margin="10,0,10,0"/>
             <Grid Grid.Row="1">
                 <TextBlock Text="Model" FontSize="16" Margin="10"/>
             </Grid>
@@ -50,34 +67,56 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <ComboBox Name="cmbAllMakes" FontSize="16" Margin="10,15"/>
+                <ComboBox Name="cmbAllMakes" DisplayMemberPath="Name" FontSize="16" Margin="10" SelectionChanged="CmbAllMakes_SelectionChanged"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">
-                <ComboBox Name="cmbAllModels" FontSize="16" Margin="10,15"/>
+                <ComboBox Name="cmbAllModels" DisplayMemberPath="Name" FontSize="16" Margin="10"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2">
-                <ComboBox Name="cmbAllBanTypes" FontSize="16" Margin="10,15"/>
+                <ComboBox Name="cmbAllBanTypes" DisplayMemberPath="Name" FontSize="16" Margin="10"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="3">
-                <ComboBox Name="cmbAllColors" FontSize="16" Margin="10,15"/>
+                <ComboBox Name="cmbAllColors" DisplayMemberPath="Name" FontSize="16" Margin="10"/>
             </Grid>
+
             <Grid Grid.Column="1" Grid.Row="4">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                    <TextBlock Text="min." FontSize="16" Margin="0,10"/>
-                    <TextBlock Text="max." FontSize="16" Margin="0,10"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-                </StackPanel>
+                <TextBlock Text="min." FontSize="16" Margin="10"/>
+                <Grid Grid.Column="1">
+                    <TextBox x:Name="txbMinMileage" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <TextBlock Text="maks." FontSize="16" Margin="0,10,10,10"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <TextBox x:Name="txbMaxMileage" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="5">
 
+            <Grid Grid.Column="1" Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="min." FontSize="16" Margin="10"/>
+                <Grid Grid.Column="1">
+                    <TextBox x:Name="txbMinPrice" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <TextBlock Text="maks." FontSize="16" Margin="0,10,10,10"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <TextBox x:Name="txbMaxPrice" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
             </Grid>
 
 
@@ -99,6 +138,62 @@
             <Grid  Grid.Column="2" Grid.Row="5">
                 <TextBlock Text="Mühərrikin həcmi" FontSize="16" Margin="10"/>
             </Grid>
+
+            <Grid Grid.Column="3">
+                <ComboBox Name="cmbAllRegions"  DisplayMemberPath="Name" FontSize="16" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="1">
+                <ComboBox Name="cmbAllFuelTypes" DisplayMemberPath="Name" FontSize="16" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="2">
+                <ComboBox Name="cmbAllGears" DisplayMemberPath="Name" FontSize="16" Margin="10"/>
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="3">
+                <ComboBox Name="cmbAllTransmissions" DisplayMemberPath="Name" FontSize="16" Margin="10"/>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="min." FontSize="16" Margin="10"/>
+                <Grid Grid.Column="1">
+                    <TextBox x:Name="txbMinRegYear" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <TextBlock Text="maks." FontSize="16" Margin="0,10,10,10"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <TextBox x:Name="txbMaxRegYear" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.67*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="min." FontSize="16" Margin="10"/>
+                <Grid Grid.Column="1">
+                    <ComboBox x:Name="cmbMinEngVolume" DisplayMemberPath="Volume" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <TextBlock Text="maks." FontSize="16" Margin="0,10,10,10"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <ComboBox x:Name="cmbMaxEngVolume" DisplayMemberPath="Volume" FontSize="12" Margin="0,13,10,13" BorderBrush="Silver"/>
+                </Grid>
+
+            </Grid>
+
+
 
 
         </Grid>
