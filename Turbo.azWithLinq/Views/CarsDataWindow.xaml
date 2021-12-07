@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Turbo.azWithLinq.Views"
         mc:Ignorable="d"
-        Title="CarsDataWindow" WindowStartupLocation="CenterScreen" Height="450" Width="800">
+        Title="CarsDataWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized" Height="450" Width="800">
     <Grid>
         <StackPanel Background="#D8D8D8">
             <Label Background="#CA1016" Content="Turbo.az" FontSize="22" FontWeight="DemiBold" Foreground="White"/>
-            <DataGrid x:Name="dataGridCars" Margin="10,20"/>
+            <DataGrid x:Name="dataGridCars" Margin="10,20" />
         </StackPanel>
     </Grid>
 </Window>

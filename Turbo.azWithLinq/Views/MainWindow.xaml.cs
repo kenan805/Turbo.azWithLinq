@@ -12,9 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Turbo.azWithLinq.Data;
+using Turbo.azWithLinq.DataAccess.Abstract;
+using Turbo.azWithLinq.DataAccess.Concrete;
+using Turbo.azWithLinq.DataAccess.Context;
 using Turbo.azWithLinq.Views;
-using Color = Turbo.azWithLinq.Data.Color;
+using Color = Turbo.azWithLinq.DataAccess.Context.Color;
 
 namespace Turbo.azWithLinq
 {
@@ -24,6 +26,7 @@ namespace Turbo.azWithLinq
     public partial class MainWindow : Window
     {
         DataClassesCarsDataContext dtx = new DataClassesCarsDataContext();
+        IGenericRepository<Car> _repository;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +39,8 @@ namespace Turbo.azWithLinq
             cmbAllTransmissions.ItemsSource = dtx.Transmissions;
             cmbMaxEngVolume.ItemsSource = dtx.EngineVolumes;
             cmbMinEngVolume.ItemsSource = dtx.EngineVolumes;
+            _repository = new GenericRepository<Car>();
+            
 
         }
 
@@ -63,8 +68,7 @@ namespace Turbo.azWithLinq
                 || txbMinPrice != null
                 || txbMaxPrice != null
                 || txbMinRegYear != null
-                || txbMaxRegYear != null
-                )
+                || txbMaxRegYear != null)
             {
                 carsDataWindow.dataGridCars.ItemsSource = from car in dtx.Cars
                                                           where car.Make.Name == (cmbAllMakes.SelectedItem as Make).Name
@@ -79,9 +83,9 @@ namespace Turbo.azWithLinq
                                                           && car.Mileage <= int.Parse(txbMaxMileage.Text)
                                                           && car.Price >= int.Parse(txbMinPrice.Text)
                                                           && car.Price <= int.Parse(txbMaxPrice.Text)
-                                                          && car.RegYear <= int.Parse(txbMinRegYear.Text)
+                                                          && car.RegYear >= int.Parse(txbMinRegYear.Text)
                                                           && car.RegYear <= int.Parse(txbMaxRegYear.Text)
-                                                          && car.EngineVolume.Volume <= int.Parse(cmbMinEngVolume.Text)
+                                                          && car.EngineVolume.Volume >= int.Parse(cmbMinEngVolume.Text)
                                                           && car.EngineVolume.Volume <= int.Parse(cmbMaxEngVolume.Text)
                                                           select new
                                                           {
@@ -91,15 +95,15 @@ namespace Turbo.azWithLinq
                                                               Price = car.Price,
                                                               RegistrationYear = car.RegYear,
                                                               BanType = car.BanType.Name,
+                                                              Mileage = car.Mileage,
                                                               Color = car.Color.Name,
                                                               EngineVolume = car.EngineVolume.Volume,
                                                               FuelType = car.FuelType.Name,
-                                                              Mileage = car.Mileage,
+                                                              Gear = car.Gear.Name,
                                                               Transmission = car.Transmission.Name
                                                           };
                 carsDataWindow.ShowDialog();
             }
-            else MessageBox.Show("KHAKHDSA");
         }
     }
 }
