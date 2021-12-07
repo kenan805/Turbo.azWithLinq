@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Turbo.azWithLinq.Data
+namespace Turbo.azWithLinq.DataAccess.Context
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
