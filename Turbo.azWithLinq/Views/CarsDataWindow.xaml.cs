@@ -19,10 +19,21 @@ namespace Turbo.azWithLinq.Views
     /// </summary>
     public partial class CarsDataWindow : Window
     {
+        public bool DataCount { get; set; } = true;
+
         public CarsDataWindow()
         {
             InitializeComponent();
+            
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataCount == false)
+            {
+                MessageBox.Show("Bağışlayın, göndərdiyiniz sorğu üzrə heç bir nəticə tapılmamışdır.Digər meyarlar üzrə axtarışa cəhd edin.");
+                Close();
+            }
         }
     }
 }
